@@ -8,7 +8,7 @@ locals {
   maven_artifact_publisher_name           = "${local.prefix}-maven-artifact-publisher${local.test_var}"
   ansible_task_runner_name                = "${local.prefix}-ansible-task-runner${local.test_var}"
   wiremock_connectivity_tester_name       = "${local.prefix}-wiremock-connectivity-tester${local.test_var}"
-  alfresco_proxy_pre_stack_builder_name   = "${local.prefix}-alfresco-proxy-pre-stack-builder${local.test_var}"
+  pre_stack_builder_name                  = "${local.prefix}-pre-stack-builder${local.test_var}"
   smoke_tests_runner_name                 = "${local.prefix}-smoke-tests-runner${local.test_var}"
   perf_tests_results_aggregator_name      = "${local.prefix}-perf-tests-results-aggregator${local.test_var}"
   ec2_instantiator_name                   = "${local.prefix}-ec2-instantiator${local.test_var}"
