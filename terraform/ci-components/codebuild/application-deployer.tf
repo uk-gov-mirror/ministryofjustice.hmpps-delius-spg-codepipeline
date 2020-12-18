@@ -23,9 +23,10 @@ resource "aws_codebuild_project" "spg-application-deployer" {
   }
 
   environment {
-    compute_type    = "BUILD_GENERAL1_SMALL"
-    image           = var.aws_ecs_image
-    type            = "LINUX_CONTAINER"
-    privileged_mode = false
+    compute_type                = "BUILD_GENERAL1_SMALL"
+    image                       = var.aws_ecs_image
+    type                        = "LINUX_CONTAINER"
+    image_pull_credentials_type = "SERVICE_ROLE"
+    privileged_mode             = true
   }
 }

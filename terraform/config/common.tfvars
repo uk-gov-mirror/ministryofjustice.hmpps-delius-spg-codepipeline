@@ -1,7 +1,7 @@
 terraform_image = "895523100917.dkr.ecr.eu-west-2.amazonaws.com/hmpps/terraform-builder-0-12"
 aws_codebuild_image = "aws/codebuild/standard:4.0"
 ansible_task_runner_java_image = "895523100917.dkr.ecr.eu-west-2.amazonaws.com/hmpps/ansible-builder-2-7:0.1.136-SPG-JAVA"
-aws_ecs_image = "895523100917.dkr.ecr.eu-west-2.amazonaws.com/hmpps/spgw-ci-ecs-deploy:latest"
+aws_ecs_image = "895523100917.dkr.ecr.eu-west-2.amazonaws.com/hmpps/spgw-ci-ecs-deploy"
 curl_image = "895523100917.dkr.ecr.eu-west-2.amazonaws.com/hmpps/spgw-ci-curl:7.71.0"
 gatling_image = "895523100917.dkr.ecr.eu-west-2.amazonaws.com/hmpps/spgw-ci-gatling:3.2.1"
 aws_cli_image = "895523100917.dkr.ecr.eu-west-2.amazonaws.com/hmpps/spgw-ci-aws-cli:2.0.7"
