@@ -25,7 +25,7 @@ resource "aws_codepipeline" "pipeline" {
           Owner                = var.repo_owner
           Repo                 = action.value[0]
           Branch               = length(action.value) > 1 ? action.value[1] : "develop"
-          PollForSourceChanges = false
+          PollForSourceChanges = true
           OAuthToken           = data.aws_ssm_parameter.ami.value
         }
       }

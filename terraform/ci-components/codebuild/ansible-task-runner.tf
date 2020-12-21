@@ -23,10 +23,11 @@ resource "aws_codebuild_project" "spg-ansible-task-runner" {
   }
 
   environment {
-    compute_type    = "BUILD_GENERAL1_SMALL"
-    image           = var.ansible_task_runner_java_image
-    type            = "LINUX_CONTAINER"
-    privileged_mode = false
+    compute_type                = "BUILD_GENERAL1_SMALL"
+    image                       = var.ansible_task_runner_java_image
+    type                        = "LINUX_CONTAINER"
+    image_pull_credentials_type = "SERVICE_ROLE"
+    privileged_mode             = true
   }
 
   vpc_config {
