@@ -1,7 +1,3 @@
-variable "environment_name" {
-  type = string
-}
-
 variable "iam_role_arn" {
   description = "ARN of the IAM role that enables AWS CodePipeline to interact with the required AWS services."
   type        = string

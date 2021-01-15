@@ -6,3 +6,6 @@ ci-plan:
 
 ci-apply:
 	scripts/terraform-local-builder.sh delius-core-dev terraform-local-apply.sh
+
+ci-destroy:
+	scripts/terraform-local-builder.sh delius-core-dev terraform-local-destroy.sh
