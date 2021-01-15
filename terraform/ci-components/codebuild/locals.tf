@@ -1,23 +1,22 @@
 locals {
   prefix = "spgw"
 
-  stack_builder_name                      = "${local.prefix}-stack-builder-0-12${local.test_var}"
-  java_application_builder_name           = "${local.prefix}-java-application-builder${local.test_var}"
-  docker_image_builder_name               = "${local.prefix}-docker-image-builder${local.test_var}"
-  application_deployer_name               = "${local.prefix}-application-deployer${local.test_var}"
-  maven_artifact_publisher_name           = "${local.prefix}-maven-artifact-publisher${local.test_var}"
-  ansible_task_runner_name                = "${local.prefix}-ansible-task-runner${local.test_var}"
-  wiremock_connectivity_tester_name       = "${local.prefix}-wiremock-connectivity-tester${local.test_var}"
-  pre_stack_builder_name                  = "${local.prefix}-pre-stack-builder${local.test_var}"
-  smoke_tests_runner_name                 = "${local.prefix}-smoke-tests-runner${local.test_var}"
-  perf_tests_results_aggregator_name      = "${local.prefix}-perf-tests-results-aggregator${local.test_var}"
-  ec2_instantiator_name                   = "${local.prefix}-ec2-instantiator${local.test_var}"
-  perf_tests_report_archiver_name         = "${local.prefix}-perf-tests-report-archiver${local.test_var}"
-  gatling_task_runner_name                = "${local.prefix}-gatling-task-runner${local.test_var}"
-  smoke_tests_results_archiver_name       = "${local.prefix}-smoke-tests-results-archiver${local.test_var}"
-  gradle_application_builder_name         = "${local.prefix}-gradle-application-builder${local.test_var}"
-  ecr_cleaner_name                        = "${local.prefix}-ecr-cleaner${local.test_var}"
-  application_tests_results_archiver_name = "${local.prefix}-application-tests-results-archiver${local.test_var}"
+  stack_builder_name                 = "${local.prefix}-stack-builder-0-12"
+  java_application_builder_name      = "${local.prefix}-java-application-builder"
+  docker_image_builder_name          = "${local.prefix}-docker-image-builder"
+  application_deployer_name          = "${local.prefix}-application-deployer"
+  maven_artifact_publisher_name      = "${local.prefix}-maven-artifact-publisher"
+  ansible_task_runner_name           = "${local.prefix}-ansible-task-runner"
+  wiremock_connectivity_tester_name  = "${local.prefix}-wiremock-connectivity-tester"
+  pre_stack_builder_name             = "${local.prefix}-pre-stack-builder"
+  smoke_tests_runner_name            = "${local.prefix}-smoke-tests-runner"
+  perf_tests_results_aggregator_name = "${local.prefix}-perf-tests-results-aggregator"
+  ec2_instantiator_name              = "${local.prefix}-ec2-instantiator"
+  perf_tests_report_archiver_name    = "${local.prefix}-perf-tests-report-archiver"
+  gatling_task_runner_name           = "${local.prefix}-gatling-task-runner"
+  smoke_tests_results_archiver_name  = "${local.prefix}-smoke-tests-results-archiver"
+  gradle_application_builder_name    = "${local.prefix}-gradle-application-builder"
+  ecr_cleaner_name                   = "${local.prefix}-ecr-cleaner"
 
   iam_role_arn = data.terraform_remote_state.common.outputs.codebuild_info["iam_role_arn"]
 
@@ -50,14 +49,9 @@ locals {
     data.terraform_remote_state.vpc.outputs.private-subnet-az3,
   ]
 
-  //TODO: remove this var, we want replace real codebuild, once ready
-  test_var = "-test"
-
   // TODO: get the sg from hmpps-engineering-platform-terraform (vpc-sg-outbound-pipeline)
   security_groups_ids = [
     data.terraform_remote_state.vpc.outputs.vpc_sg_outbound_id,
     "sg-0460107d0b17f1862"
   ]
-
-
 }
