@@ -1,5 +1,6 @@
 locals {
-  prefix = "spgw"
+  prefix       = "spgw"
+  service_name = "${var.short_environment_name}-spgw-codebuild"
 
   stack_builder_name                 = "${local.prefix}-stack-builder-0-12"
   java_application_builder_name      = "${local.prefix}-java-application-builder"
@@ -18,10 +19,10 @@ locals {
   gradle_application_builder_name    = "${local.prefix}-gradle-application-builder"
   ecr_cleaner_name                   = "${local.prefix}-ecr-cleaner"
 
-  iam_role_arn = data.terraform_remote_state.common.outputs.codebuild_info["iam_role_arn"]
+  iam_role_arn = aws_iam_role.codebuild_role.arn
 
-  tags           = data.terraform_remote_state.common.outputs.tags
-  log_group_name = data.terraform_remote_state.common.outputs.codebuild_info["log_group"]
+  tags           = merge(var.tags)
+  log_group_name = "${local.prefix}-spgw-pipeline"
 
   stack_builder_file                      = "ci/buildspec-build-stack.yml"
   java_application_file                   = "ci/buildspec-build-application.yml"
@@ -44,14 +45,12 @@ locals {
   vpc_id = data.terraform_remote_state.vpc.outputs.vpc_id
 
   private_subnet_ids = [
-    data.terraform_remote_state.vpc.outputs.private-subnet-az1,
-    data.terraform_remote_state.vpc.outputs.private-subnet-az2,
-    data.terraform_remote_state.vpc.outputs.private-subnet-az3,
+    data.terraform_remote_state.vpc.outputs.vpc_private-subnet-az1,
+    data.terraform_remote_state.vpc.outputs.vpc_private-subnet-az2,
+    data.terraform_remote_state.vpc.outputs.vpc_private-subnet-az3
   ]
 
-  // TODO: get the sg from hmpps-engineering-platform-terraform (vpc-sg-outbound-pipeline)
   security_groups_ids = [
-    data.terraform_remote_state.vpc.outputs.vpc_sg_outbound_id,
-    "sg-0460107d0b17f1862"
+    aws_security_group.vpc-sg-outbound-pipeline.id
   ]
 }

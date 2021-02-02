@@ -1,22 +1,11 @@
-# common
-data "terraform_remote_state" "common" {
-  backend = "s3"
-
-  config = {
-    bucket = var.remote_state_bucket_name
-    key    = "aws-migration-pipelines/common/terraform.tfstate"
-    region = var.region
-  }
+data "template_file" "codebuild_assumerole_template" {
+  template = file("./templates/iam/codebuild_assumerole_policy.tpl")
+  vars     = {}
 }
 
+data "template_file" "codebuild_execution_policy_template" {
+  template = file("./templates/iam/codebuild_execution_policy.tpl")
 
-# vpc
-data "terraform_remote_state" "vpc" {
-  backend = "s3"
-
-  config = {
-    bucket = var.remote_state_bucket_name
-    key    = "vpc/terraform.tfstate"
-    region = var.region
-  }
+  vars = {}
 }
+

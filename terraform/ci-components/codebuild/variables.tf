@@ -2,6 +2,9 @@ variable "remote_state_bucket_name" {
   description = "Terraform remote state bucket name"
 }
 
+variable "short_environment_name" {
+  type = string
+}
 variable "region" {
   description = "The AWS region."
 }
@@ -31,5 +34,24 @@ variable "gatling_image" {
 
 variable "aws_cli_image" {
   description = "The smoke-tests-results-archiver image codebuild."
+}
+
+
+variable "tags" {
+  type = map(string)
+}
+
+
+variable "environment_name" {
+  type = string
+}
+
+
+variable "project_name" {
+  description = "The project name - eg delius (and delius-core)"
+}
+
+variable "environment_type" {
+  description = "The project name - eg delius (and delius-core)"
 }
 
