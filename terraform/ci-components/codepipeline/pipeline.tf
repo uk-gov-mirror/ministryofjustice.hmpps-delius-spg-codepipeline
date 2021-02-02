@@ -5,6 +5,7 @@ resource "aws_codepipeline" "pipeline" {
     Name = var.pipeline_name
   })
 
+  count = var.is_dev
   artifact_store {
     type     = "S3"
     location = var.artefacts_bucket

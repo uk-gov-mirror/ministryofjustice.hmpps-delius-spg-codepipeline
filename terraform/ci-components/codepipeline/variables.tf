@@ -61,3 +61,8 @@ variable "approval_required" {
   description = "Whether the Terraform planned changes must be approved before applying."
   default     = true
 }
+
+variable "is_dev" {
+  type = number
+  default = 1
+}
