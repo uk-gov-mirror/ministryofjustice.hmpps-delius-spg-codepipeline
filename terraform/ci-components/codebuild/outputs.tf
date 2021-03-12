@@ -50,6 +50,14 @@ output "spg_stack_builder_name" {
   value = aws_codebuild_project.spg-stack-builder.name
 }
 
+output "spg_stack_builder_plan_name" {
+  value = aws_codebuild_project.spg-stack-builder-plan.name
+}
+
+output "spg_stack_builder_apply_name" {
+  value = aws_codebuild_project.spg-stack-builder-apply.name
+}
+
 output "spg_smoke_tests_runner_name" {
   value = aws_codebuild_project.spg-smoke-tests-runner.name
 }

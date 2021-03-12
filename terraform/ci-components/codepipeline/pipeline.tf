@@ -42,9 +42,9 @@ resource "aws_codepipeline" "pipeline" {
         for_each = stage.value.actions
         content {
           name             = action.value.action_name
-          category         = "Build"
+          category         = action.value.action_category
           owner            = "AWS"
-          provider         = "CodeBuild"
+          provider         = action.value.action_provider
           version          = "1"
           run_order        = 3
           input_artifacts  = [action.value.input_artifacts]

@@ -40,12 +40,24 @@ variable "stages" {
     actions = list(object({
       codebuild_name   = string
       action_name      = string
+      action_category  = string
       action_env       = string
+      action_provider  = string
       input_artifacts  = string
       output_artifacts = string
       namespace        = string
     }))
   }))
+}
+
+variable "action_category" {
+  type = string
+  default = "Build"
+}
+
+variable "action_provider" {
+  type = string
+  default = "AWS"
 }
 
 variable "action_env" {

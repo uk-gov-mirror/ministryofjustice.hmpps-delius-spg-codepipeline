@@ -2,6 +2,8 @@ locals {
   prefix = "spgw"
 
   stack_builder_name                 = "${local.prefix}-stack-builder-0-12"
+  stack_builder_name_plan            = "${local.prefix}-stack-builder-plan-0-12"
+  stack_builder_name_apply           = "${local.prefix}-stack-builder-apply-0-12"
   java_application_builder_name      = "${local.prefix}-java-application-builder"
   docker_image_builder_name          = "${local.prefix}-docker-image-builder"
   application_deployer_name          = "${local.prefix}-application-deployer"
@@ -24,6 +26,8 @@ locals {
   log_group_name = data.terraform_remote_state.common.outputs.codebuild_info["log_group"]
 
   stack_builder_file                      = "ci/buildspec-build-stack.yml"
+  stack_builder_plan_file                 = "ci/buildspec-build-stack-plan.yml"
+  stack_builder_apply_file                = "ci/buildspec-build-stack-apply.yml"
   java_application_file                   = "ci/buildspec-build-application.yml"
   docker_image_file                       = "ci/buildspec-build-docker-image.yml"
   application_deployer_file               = "ci/buildspec-deploy-application.yml"
