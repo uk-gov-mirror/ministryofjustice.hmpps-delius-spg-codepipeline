@@ -50,16 +50,6 @@ variable "stages" {
   }))
 }
 
-variable "action_category" {
-  type = string
-  default = "Build"
-}
-
-variable "action_provider" {
-  type = string
-  default = "AWS"
-}
-
 variable "action_env" {
   type    = string
   default = null

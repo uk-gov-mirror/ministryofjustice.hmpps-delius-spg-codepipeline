@@ -4,15 +4,15 @@
 # ${2} - the script to run: plan or apply
 # See Makefile for usage
 
-#rm -rf terraform/ci_env_configs
-#git clone git@github.com:ministryofjustice/hmpps-engineering-platform-terraform.git
-#mv hmpps-engineering-platform-terraform/env_configs terraform/ci_env_configs
-#rm -rf hmpps-engineering-platform-terraform
+rm -rf terraform/ci_env_configs
+git clone git@github.com:ministryofjustice/hmpps-engineering-platform-terraform.git
+mv hmpps-engineering-platform-terraform/env_configs terraform/ci_env_configs
+rm -rf hmpps-engineering-platform-terraform
 
 docker run -it --rm \
     -v $(pwd):/home/tools/data \
     -v ~/.aws:/home/tools/.aws \
-    -e AWS_PROFILE=delius-core-sandpit \
+    -e AWS_PROFILE=hmpps-token \
     -e TF_LOG=INFO \
     -e HMPPS_BUILD_WORK_DIR=/home/tools/data/terraform \
     -e environment_name="${1}" \
