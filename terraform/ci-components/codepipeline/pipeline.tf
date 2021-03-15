@@ -45,8 +45,8 @@ resource "aws_codepipeline" "pipeline" {
           #category         = length(action.value.action_category) > 1 ? action.value.action_category : "Build"
           category         = "Build"
           owner            = "AWS"
-          #provider         = length(action.value.action_provider) > 1 ? action.value.action_provider : "AWS"
-          provider         = "AWS"
+          provider         = length(action.value.action_provider) > 1 ? action.value.action_provider : "AWS"
+          #provider         = "AWS"
           version          = "1"
           run_order        = 3
           input_artifacts  = [action.value.input_artifacts]
