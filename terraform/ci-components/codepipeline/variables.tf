@@ -40,9 +40,9 @@ variable "stages" {
     actions = list(object({
       codebuild_name   = string
       action_name      = string
-      action_category  = string
+#      action_category  = string
       action_env       = string
-      action_provider  = string
+#      action_provider  = string
       input_artifacts  = string
       output_artifacts = string
       namespace        = string
