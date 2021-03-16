@@ -39,27 +39,32 @@ resource "aws_codepipeline" "pipeline" {
 
       # Apply
       dynamic "action" {
-        count = length(stage.value.actions)
-        for_each = toset(local.content_count)
-          content {
-            name = action.value.action_name + count.index
-            #category         = length(action.value.action_category) > 1 ? action.value.action_category : "Build"
-            category = "Build"
-            owner = "AWS"
-            #provider         = length(action.value.action_provider) > 1 ? action.value.action_provider : "AWS"
-            provider = "AWS"
-            version = "1"
-            run_order = 3
-            input_artifacts = [
-              action.value.input_artifacts]
-            output_artifacts = [
-              action.value.output_artifacts]
-            namespace = action.value.namespace
-            configuration = {
-              ProjectName = action.value.codebuild_name
-              EnvironmentVariables = action.value.action_env
+
+        for_each = flatten([
+          for action in stage.value.actions : [
+            for count in local.content_count : {
+              nameSuffix    = count
             }
+          ]
+        ])
+
+        content {
+          name = action.value.action_name + nameSuffix
+          #category         = length(action.value.action_category) > 1 ? action.value.action_category : "Build"
+          category = "Build"
+          owner = "AWS"
+          #provider         = length(action.value.action_provider) > 1 ? action.value.action_provider : "AWS"
+          provider = "AWS"
+          version = "1"
+          run_order = 3
+          input_artifacts = [action.value.input_artifacts]
+          output_artifacts = [action.value.output_artifacts]
+          namespace = action.value.namespace
+          configuration = {
+            ProjectName = action.value.codebuild_name
+            EnvironmentVariables = action.value.action_env
           }
+        }
       }
     }
   }
