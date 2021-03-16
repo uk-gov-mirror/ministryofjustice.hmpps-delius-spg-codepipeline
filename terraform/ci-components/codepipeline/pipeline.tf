@@ -43,13 +43,14 @@ resource "aws_codepipeline" "pipeline" {
         for_each = flatten([
           for action in stage.value.actions : [
             for count in local.content_count : {
-              var.name_suffix    = count
+              myName    = action.value.action_name + count
             }
           ]
         ])
 
         content {
-          name = action.value.action_name + var.name_suffix
+          #name = action.value.action_name + var.name_suffix
+          name = "${action.value.myName}"
           #category         = length(action.value.action_category) > 1 ? action.value.action_category : "Build"
           category = "Build"
           owner = "AWS"
