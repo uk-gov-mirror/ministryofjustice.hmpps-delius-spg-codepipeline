@@ -50,6 +50,11 @@ variable "stages" {
   }))
 }
 
+variable "name_suffix" {
+  type = string
+  default = null
+}
+
 variable "action_env" {
   type    = string
   default = null
