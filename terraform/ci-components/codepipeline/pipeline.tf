@@ -39,11 +39,10 @@ resource "aws_codepipeline" "pipeline" {
 
       # Apply
       dynamic "action" {
-        for_each = stage.value.actions
-        content {
-          for_each = local.content_count
+        count = length(stage.value.actions)
+        for_each = toset(local.content_count)
           content {
-            name = action.value.action_name
+            name = action.value.action_name + count.index
             #category         = length(action.value.action_category) > 1 ? action.value.action_category : "Build"
             category = "Build"
             owner = "AWS"
@@ -61,7 +60,6 @@ resource "aws_codepipeline" "pipeline" {
               EnvironmentVariables = action.value.action_env
             }
           }
-        }
       }
     }
   }
