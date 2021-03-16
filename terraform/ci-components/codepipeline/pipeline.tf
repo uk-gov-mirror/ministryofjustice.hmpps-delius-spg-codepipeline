@@ -43,7 +43,7 @@ resource "aws_codepipeline" "pipeline" {
         for_each = flatten([
           for myAction in stage.value.actions : [
             for count in local.content_count : {
-              name    = myAction.action_name + count
+              name    = format("%s-%s", myAction.action_name, count.value)
             }
           ]
         ])
