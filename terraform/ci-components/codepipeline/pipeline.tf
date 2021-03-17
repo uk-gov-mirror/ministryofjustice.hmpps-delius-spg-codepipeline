@@ -42,7 +42,8 @@ resource "aws_codepipeline" "pipeline" {
 
         for_each = flatten([
           for myAction in stage.value.actions : [
-            for type in local.content_type : {
+            #for type in local.content_type : {
+            for runOrder, type in local.countent_type_map : {
               action_name    = format("%s%s", myAction.action_name, type)
               input_artifacts = myAction.input_artifacts
               output_artifacts = myAction.output_artifacts
@@ -52,7 +53,7 @@ resource "aws_codepipeline" "pipeline" {
               action_provider = myAction.action_provider
               action_category = myAction.action_category
               action_type = type
-              run_order = type.index + 1
+              run_order = runOrder
             }
           ]
         ])
@@ -63,7 +64,7 @@ resource "aws_codepipeline" "pipeline" {
           version = "1"
           category = action.value.action_type == "Approve" ? "Approval" : action.value.action_category
           provider = action.value.action_type == "Approve" ? "Manual" : action.value.action_provider
-          run_order = action.value.action_type
+          run_order = action.value.run_order
           input_artifacts = action.value.action_type == "Approve" ? null : [action.value.input_artifacts]
           output_artifacts = action.value.action_type == "Plan" ? [action.value.output_artifacts] : null
           namespace = action.value.action_type == "Plan" ? action.value.namespace : null
