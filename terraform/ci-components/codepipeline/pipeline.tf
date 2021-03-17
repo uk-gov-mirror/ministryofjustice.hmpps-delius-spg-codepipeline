@@ -42,8 +42,8 @@ resource "aws_codepipeline" "pipeline" {
 
         for_each = flatten([
           for myAction in stage.value.actions : [
-            for count in local.content_count : {
-              action_name    = format("%s%s", myAction.action_name, count)
+            for type in local.content_type : {
+              action_name    = format("%s%s", myAction.action_name, type)
               input_artifacts = myAction.input_artifacts
               output_artifacts = myAction.output_artifacts
               namespace = myAction.namespace
@@ -51,12 +51,12 @@ resource "aws_codepipeline" "pipeline" {
               action_env = myAction.action_env
               action_provider = myAction.action_provider
               action_category = myAction.action_category
+              action_type = type
             }
           ]
         ])
 
         content {
-          #name = action.value.action_name + var.name_suffix
           name = action.value.action_name
           category = action.value.action_category
           owner = "AWS"
@@ -64,7 +64,7 @@ resource "aws_codepipeline" "pipeline" {
           version = "1"
           run_order = 3
           input_artifacts = [action.value.input_artifacts]
-          output_artifacts = [action.value.output_artifacts]
+          output_artifacts = action.value.action_type == "Plan" ? [action.value.output_artifacts] : null
           namespace = action.value.namespace
           configuration = {
             ProjectName = action.value.codebuild_name

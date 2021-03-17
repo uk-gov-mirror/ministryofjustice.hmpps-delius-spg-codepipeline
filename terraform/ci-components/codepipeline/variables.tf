@@ -46,6 +46,7 @@ variable "stages" {
       input_artifacts  = string
       output_artifacts = string
       namespace        = string
+      action_type      = string
     }))
   }))
 }

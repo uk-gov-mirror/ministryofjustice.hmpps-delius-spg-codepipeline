@@ -1,3 +1,3 @@
 locals {
-  content_count = ["1","2","3"]
+  content_type = ["Plan","Approve","Apply"]
 }
