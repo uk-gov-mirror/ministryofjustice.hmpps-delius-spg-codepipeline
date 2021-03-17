@@ -65,7 +65,7 @@ resource "aws_codepipeline" "pipeline" {
           run_order = 3
           input_artifacts = [action.value.input_artifacts]
           output_artifacts = action.value.action_type == "Plan" ? [action.value.output_artifacts] : null
-          namespace = action.value.namespace
+          namespace = action.value.action_type == "Plan" ? action.value.namespace : null
           configuration = {
             ProjectName = action.value.codebuild_name
             EnvironmentVariables = action.value.action_env
