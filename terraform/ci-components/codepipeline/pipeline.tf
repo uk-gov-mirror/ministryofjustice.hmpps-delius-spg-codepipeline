@@ -64,7 +64,7 @@ resource "aws_codepipeline" "pipeline" {
           provider = action.value.action_type == "Approve" ? "Manual" : action.value.action_provider
           run_order = action.value.action_type == "Approve" ? null : 3
           input_artifacts = action.value.action_type == "Approve" ? null : [action.value.input_artifacts]
-          output_artifacts = action.value.action_type == "Plan" ? [action.value.output_artifacts] : null
+          output_artifacts = action.value.action_type == "Apply" ? [action.value.output_artifacts] : null
           namespace = action.value.action_type == "Plan" ? action.value.namespace : null
           configuration = action.value.action_type == "Approve" ? null : {
             ProjectName = action.value.codebuild_name
