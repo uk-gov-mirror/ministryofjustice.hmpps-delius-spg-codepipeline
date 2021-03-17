@@ -58,15 +58,15 @@ resource "aws_codepipeline" "pipeline" {
 
         content {
           name = action.value.action_name
-          category = action.value.action_category
           owner = "AWS"
-          provider = action.value.action_provider
           version = "1"
-          run_order = 3
-          input_artifacts = [action.value.input_artifacts]
+          category = action.value.action_type == "Approve" ? "Approval" : action.value.action_category
+          provider = action.value.action_type == "Approve" ? "Manual" : action.value.action_provider
+          run_order = action.value.action_type == "Approve" ? null : 3
+          input_artifacts = action.value.action_type == "Approve" ? null : [action.value.input_artifacts]
           output_artifacts = action.value.action_type == "Plan" ? [action.value.output_artifacts] : null
           namespace = action.value.action_type == "Plan" ? action.value.namespace : null
-          configuration = {
+          configuration = action.value.action_type == "Approve" ? null : {
             ProjectName = action.value.codebuild_name
             EnvironmentVariables = action.value.action_env
           }
