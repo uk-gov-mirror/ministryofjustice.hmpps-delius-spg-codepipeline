@@ -53,7 +53,7 @@ resource "aws_codepipeline" "pipeline" {
               action_provider = myAction.action_provider
               action_category = myAction.action_category
               action_type = type
-              run_order = runOrder
+              run_order = index(stage.value.actions, myAction.action_name)
             }
           ]
         ])
