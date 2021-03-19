@@ -1,5 +1,5 @@
-resource "aws_codepipeline" "pipeline" {
-  name     = var.pipeline_name
+resource "aws_codepipeline" "pipeline-release" {
+  name     = format ("%s-release", var.pipeline_name)
   role_arn = var.iam_role_arn
   tags = merge(var.tags, {
     Name = var.pipeline_name
@@ -42,8 +42,7 @@ resource "aws_codepipeline" "pipeline" {
 
         for_each = flatten([
           for myAction in stage.value.actions : [
-            #for type in local.content_type : {
-            for runOrder, type in local.countent_type_map : {
+            for type in local.content_type : {
               action_name    = format("%s%s", myAction.action_name, type)
               input_artifacts = myAction.input_artifacts
               output_artifacts = myAction.output_artifacts
