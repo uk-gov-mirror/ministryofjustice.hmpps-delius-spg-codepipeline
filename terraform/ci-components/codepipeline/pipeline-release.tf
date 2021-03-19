@@ -2,7 +2,7 @@ resource "aws_codepipeline" "pipeline-release" {
   name     = format ("%s-release", var.pipeline_name)
   role_arn = var.iam_role_arn
   tags = merge(var.tags, {
-    Name = var.pipeline_name
+    Name = name
   })
 
   artifact_store {
