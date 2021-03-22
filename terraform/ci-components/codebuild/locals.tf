@@ -2,8 +2,8 @@ locals {
   prefix = "spgw"
 
   stack_builder_name                 = "${local.prefix}-stack-builder-0-12"
-  stack_builder_name_plan            = "${local.prefix}-stack-builder-plan-0-12"
-  stack_builder_name_apply           = "${local.prefix}-stack-builder-apply-0-12"
+  stack_builder_name_plan            = "${local.stack_builder_name}-plan"
+  stack_builder_name_apply           = "${local.stack_builder_name}-apply"
   java_application_builder_name      = "${local.prefix}-java-application-builder"
   docker_image_builder_name          = "${local.prefix}-docker-image-builder"
   application_deployer_name          = "${local.prefix}-application-deployer"

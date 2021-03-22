@@ -47,7 +47,7 @@ resource "aws_codepipeline" "pipeline-release" {
               input_artifacts = myAction.input_artifacts
               output_artifacts = myAction.output_artifacts
               namespace = myAction.namespace
-              codebuild_name = myAction.codebuild_name
+              codebuild_name = format("%s-%s", myAction.codebuild_name, type)
               action_env = myAction.action_env
               action_provider = myAction.action_provider
               action_category = myAction.action_category
@@ -61,13 +61,13 @@ resource "aws_codepipeline" "pipeline-release" {
           name = action.value.action_name
           owner = "AWS"
           version = "1"
-          category = action.value.action_type == "Approve" ? "Approval" : action.value.action_category
-          provider = action.value.action_type == "Approve" ? "Manual" : action.value.action_provider
+          category = action.value.action_type == "approve" ? "Approval" : action.value.action_category
+          provider = action.value.action_type == "approve" ? "Manual" : action.value.action_provider
           run_order = action.value.run_order
-          input_artifacts = action.value.action_type == "Approve" ? null : [action.value.input_artifacts]
-          output_artifacts = action.value.action_type == "Plan" ? [action.value.output_artifacts] : null
-          namespace = action.value.action_type == "Plan" ? action.value.namespace : null
-          configuration = action.value.action_type == "Approve" ? null : {
+          input_artifacts = action.value.action_type == "approve" ? null : [action.value.input_artifacts]
+          output_artifacts = action.value.action_type == "plan" ? [action.value.output_artifacts] : null
+          namespace = action.value.action_type == "plan" ? action.value.namespace : null
+          configuration = action.value.action_type == "approve" ? null : {
             ProjectName = action.value.codebuild_name
             EnvironmentVariables = action.value.action_env
           }

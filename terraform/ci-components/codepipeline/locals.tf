@@ -1,3 +1,3 @@
 locals {
-  content_type = ["Plan","Approve","Apply"]
+  content_type = ["plan","approve","apply"]
 }
