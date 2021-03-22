@@ -42,7 +42,8 @@ resource "aws_codepipeline" "pipeline-release" {
 
         for_each = flatten([
           for myAction in stage.value.actions : [
-            for type in local.content_type : {
+            #for type in local.content_type : {
+            for type in var.action_types : {
               action_name    = format("%s%s", myAction.action_name, type)
               input_artifacts = myAction.input_artifacts
               output_artifacts = myAction.output_artifacts

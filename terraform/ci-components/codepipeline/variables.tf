@@ -69,3 +69,7 @@ variable "approval_required" {
   description = "Whether the Terraform planned changes must be approved before applying."
   default     = true
 }
+
+variable "action_types" {
+  default = ["plan","approve","apply"]
+}
