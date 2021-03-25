@@ -26,8 +26,8 @@ locals {
   log_group_name = data.terraform_remote_state.common.outputs.codebuild_info["log_group"]
 
   stack_builder_file                      = "ci/buildspec-build-stack.yml"
-  stack_builder_plan_file                 = "ci/buildspec-build-stack-plan.yml"
-  stack_builder_apply_file                = "ci/buildspec-build-stack-apply.yml"
+  stack_builder_plan_file                 = "ci/buildspec-plan-stack.yml"
+  stack_builder_apply_file                = "ci/buildspec-apply-stack.yml"
   java_application_file                   = "ci/buildspec-build-application.yml"
   docker_image_file                       = "ci/buildspec-build-docker-image.yml"
   application_deployer_file               = "ci/buildspec-deploy-application.yml"
