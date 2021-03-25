@@ -72,5 +72,5 @@ variable "approval_required" {
 
 variable "action_types" {
   type = list(string)
-  default = ["Plan"]
+  default = ["plan", "approve", "apply"]
 }
