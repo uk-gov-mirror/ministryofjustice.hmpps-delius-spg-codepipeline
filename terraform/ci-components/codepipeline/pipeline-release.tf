@@ -1,3 +1,4 @@
+/*
 resource "aws_codepipeline" "pipeline-release" {
   name     = format ("%s-release", var.pipeline_name)
   role_arn = var.iam_role_arn
@@ -76,4 +77,4 @@ resource "aws_codepipeline" "pipeline-release" {
       }
     }
   }
-}
+}*/
